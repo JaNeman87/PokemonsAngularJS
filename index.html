@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="Pokemons">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>AngularJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+    <script src="angular.js"></script>
+    <link rel="stylesheet" href="pokemon.css" />
+  </head>
+  <body>
+    <div class="container" ng-controller="pokemonCtrl as pokemon">
+      <div class="inputAndButton">
+        <input
+          class="input"
+          type="text"
+          ng-model="pokemon.inputVal"
+          ng-keypress="($event.charCode==13) ? pokemon.searchBtn() : return"
+        />
+        <button class="Button" ng-click="pokemon.searchBtn()">Search</button>
+      </div>
+
+      <div ng-if="pokemon.foundColor" class="sort">
+        <div>
+          <h3 class="foundText">Click on the name to find out more!!!</h3>
+        </div>
+        <button ng-click="pokemon.sort()" class="sortButton">
+          Sort alphabetically
+        </button>
+      </div>
+      <div class="pokemonInfoCentered">
+        <div class="pokemonInfo" ng-if="pokemon.foundPokemon">
+          <div ng-if="pokemon.foundPokemon" class="">
+            <img src="{{ pokemon.singlePokemonImage }}" alt="" />
+          </div>
+          <div ng-if="pokemon.foundPokemon" class="pokInfoSingle">
+            Name: {{ pokemon.singlePokemonName }}
+          </div>
+          <div ng-if="pokemon.foundPokemon" class="pokInfoSingle">
+            Weight: {{ pokemon.pokemonWeight }} gr
+          </div>
+          <div ng-if="pokemon.foundPokemon" class="pokInfoSingle">
+            Height: {{ pokemon.pokemonHeight }} cm
+          </div>
+          <div ng-if="pokemon.foundPokemon" class="pokInfoSingle">
+            Abilities: {{ pokemon.pokemonAbilities.toString() }}
+          </div>
+        </div>
+        <div ng-if="pokemon.loading" >
+        <div class="loader" >Loading</div></div>
+        <div class="position">
+          <div
+            class="pokImgCentered"
+            ng-if="pokemon.foundColor && pokemon.loading === false"
+            ng-repeat="poke in pokemon.pokemonsByColorWithImage"
+          >
+            <div class="pokemonsWithImage">
+              <img src="{{ poke.image }}" alt="" height="130" width="130" />
+              <p
+                class="pokemonClicked"
+                ng-click="pokemon.onPokemonClick(poke.name)"
+              >
+                {{ poke.name }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="warning"
+          ng-if="pokemon.foundPokemon === false && pokemon.foundColor === false"
+        >
+          <h1>There is no pokemon with that name or color!</h1>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
