@@ -1,0 +1,17 @@
+<div class="position">
+    <div
+      class="pokImgCentered"
+      ng-if="vm.visible"
+      ng-repeat="poke in vm.pok"
+    >
+      <div class="pokemonsWithImage">
+        <img src="{{ poke.image }}" alt="" height="130" width="130" />
+        <p
+          class="pokemonClicked"
+          ng-click="vm.newFunc(poke.name)"
+        >
+          {{ poke.name }}
+        </p>
+      </div>
+    </div>
+  </div>

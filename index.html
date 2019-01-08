@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>AngularJS</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
-    <script src="angular.js"></script>
+
     <link rel="stylesheet" href="pokemon.css" />
   </head>
   <body>
@@ -20,7 +20,6 @@
         />
         <button class="Button" ng-click="pokemon.searchBtn()">Search</button>
       </div>
-
       <div ng-if="pokemon.foundColor" class="sort">
         <div>
           <h3 class="foundText">Click on the name to find out more!!!</h3>
@@ -30,29 +29,11 @@
         </button>
       </div>
       <div class="pokemonInfoCentered">
-        <div class="pokemonInfo" ng-if="pokemon.foundPokemon">
-          <div ng-if="pokemon.foundPokemon" class="">
-            <img src="{{ pokemon.singlePokemonImage }}" alt="" />
-          </div>
-          <div ng-if="pokemon.foundPokemon" class="pokInfoSingle">
-            Name: {{ pokemon.singlePokemonName }}
-          </div>
-          <div ng-if="pokemon.foundPokemon" class="pokInfoSingle">
-            Weight: {{ pokemon.pokemonWeight }} gr
-          </div>
-          <div ng-if="pokemon.foundPokemon" class="pokInfoSingle">
-            Height: {{ pokemon.pokemonHeight }} cm
-          </div>
-          <div ng-if="pokemon.foundPokemon" class="pokInfoSingle">
-            Abilities: {{ pokemon.pokemonAbilities.toString() }}
-          </div>
-        </div>
-        <div ng-if="pokemon.loading" >
-        <div class="loader" >Loading</div></div>
-        <div class="position">
+        <pokipsi pok="pokemon.pok" visible="pokemon.foundPokemon"></pokipsi>
+        <!-- <div class="position">
           <div
             class="pokImgCentered"
-            ng-if="pokemon.foundColor && pokemon.loading === false"
+            ng-if="pokemon.foundColor"
             ng-repeat="poke in pokemon.pokemonsByColorWithImage"
           >
             <div class="pokemonsWithImage">
@@ -65,7 +46,8 @@
               </p>
             </div>
           </div>
-        </div>
+        </div> -->
+        <pok-color visible="pokemon.foundColor" clicker="pokemon.onPokemonClick" pok="pokemon.pokemonsByColorWithImage"></pok-color>
         <div
           class="warning"
           ng-if="pokemon.foundPokemon === false && pokemon.foundColor === false"
@@ -74,5 +56,9 @@
         </div>
       </div>
     </div>
+    <script src="angular.js"></script>
+    <script src="factory.js"></script>
+    <script src="pokInfoDirective.js"></script>
+    <script src="pokColorDir.js"></script>
   </body>
 </html>

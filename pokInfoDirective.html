@@ -1,0 +1,22 @@
+<div ng-if="vm.visible" class="pokemonInfoCentered">
+    <div class="pokemonInfo" >
+      <div class="">
+        <img src="{{ vm.pok.sprites.front_shiny }}" alt="" />
+      </div>
+      <div class="pokInfoSingle">
+        Name: {{ vm.pok.name }}
+      </div>
+      <div  class="pokInfoSingle">
+        Weight: {{ vm.pok.weight }} gr
+      </div>
+      <div class="pokInfoSingle">
+        Height: {{ vm.pok.height }} cm
+      </div>
+      <div  class="pokInfoSingle">
+        Abilities:
+        <span ng-repeat="ability in vm.pok.abilities">
+          {{ ability.ability.name }},
+        </span>
+      </div>
+    </div>
+  </div>
